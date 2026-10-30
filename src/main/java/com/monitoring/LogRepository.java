@@ -14,6 +14,10 @@ public class LogRepository {
     // shortcut: in-memory, lost on restart; upgrade to a DB if persistence is needed
     private final ConcurrentLinkedDeque<LogEntry> entries = new ConcurrentLinkedDeque<>();
 
+    public void clear() {
+        entries.clear();
+    }
+
     public void save(LogEntry entry) {
         entries.addFirst(entry);
         if (entries.size() > MAX_ENTRIES) {

@@ -2,6 +2,7 @@ package com.monitoring;
 
 import com.monitoring.MetricsService.LogPage;
 import com.monitoring.MetricsService.ServiceSummary;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,12 @@ public class MetricsController {
                         @RequestParam(defaultValue = "0") int page,
                         @RequestParam(defaultValue = "20") int size) {
         return metrics.logs(text(service), text(status), instant(from), instant(to), page, size);
+    }
+
+    @DeleteMapping("/logs")
+    public Map<String, Boolean> clearLogs() {
+        metrics.clearLogs();
+        return Map.of("cleared", true);
     }
 
     @PostMapping("/simulate-load")

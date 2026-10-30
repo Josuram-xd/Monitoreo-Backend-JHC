@@ -36,6 +36,10 @@ public class MetricsService {
         return new LogPage(items, page, size, all.size());
     }
 
+    public void clearLogs() {
+        repository.clear();
+    }
+
     public int simulateLoad() {
         for (int i = 0; i < SIMULATED_CALLS; i++) {
             try {
